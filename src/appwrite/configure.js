@@ -1,5 +1,5 @@
 import config from "../conf/config"
-import { Client, Account, ID, Databases, Storage, Query } from "appwrite";
+import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service{
     client = new Client();
@@ -136,7 +136,7 @@ export class Service{
         return this.bucket.getFilePreview(
             config.appwriteBucketId,
             fileId,
-        )
+        ).href
     }
 
 }
