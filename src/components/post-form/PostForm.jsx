@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form'
 import { Button, Input, Select, RTE } from '../index'
 import appwriteService from "../../appwrite/configure"
 import { useNavigate } from "react-router-dom";
-import { UseSelector, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
@@ -75,7 +74,7 @@ export default function PostForm({ post }) {
     }, [watch, slugTransform, setValue])
 
     return (
-        
+
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <div className="w-2/3 px-2">
                 <Input

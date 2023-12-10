@@ -51,8 +51,6 @@ export class AuthService{
             console.log('Appwrite service :: logout :: error',error);               
         }
     }
-
-    async singup(){}
 }
 
 const authService = new AuthService()
