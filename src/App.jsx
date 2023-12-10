@@ -31,7 +31,7 @@ function App() {
           <Outlet />
         </main>
       </div>
-      <div className='w-full-block'>
+      <div className='w-full'>
         <Footer />
       </div>
     </div>
