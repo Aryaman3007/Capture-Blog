@@ -18,8 +18,8 @@ function Home() {
         return (
             <div className='w-full py-8'>
                 <Container>
-                    <div className="flex flex-wrap">
-                        <h1>Login to read posts</h1>
+                    <div className="flex flex-wrap justify-center items-center font-bold text-2xl">
+                        <h1>LOGIN TO READ POSTS</h1>
                     </div>
                 </Container>
             </div>

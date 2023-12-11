@@ -20,17 +20,17 @@ export default function PostForm({ post }) {
     })
 
     const navigate = useNavigate()
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector((state) => state.auth.userData)
 
     const submit = async (data) => {
         if (post) {
-            data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
+            const file = data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
             if (file) {
-                appwriteService.deleteFile(post.featuredImage)
+                appwriteService.deleteFile(post.image)
             }
-            const dbPost = await appwriteService.updatePost(post, $id, {
+            const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
-                featuredImage: file ? file.$id : undefined,
+                image: file ? file.$id : undefined,
             })
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`)
@@ -39,10 +39,10 @@ export default function PostForm({ post }) {
             const file = await appwriteService.uploadFile(data.image[0])
             if (file) {
                 const fileId = file.$id
-                data.featuredImage = fileId
+                data.image = fileId
                 const dbPost = await appwriteService.createPost({
                     ...data,
-                    userId: userData.$id,
+                    userID: userData.$id,
                 })
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`)
@@ -108,7 +108,7 @@ export default function PostForm({ post }) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(post.featuredImage)}
+                            src={appwriteService.getFilePreview(post.image)}
                             alt={post.title}
                             className="rounded-lg"
                         />

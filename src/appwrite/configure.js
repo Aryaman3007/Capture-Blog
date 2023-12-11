@@ -1,4 +1,4 @@
-import config from "../conf/config"
+import config from "../conf/config.js"
 import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service{
@@ -14,26 +14,27 @@ export class Service{
         this.bucket = new Storage(this.client);
     }
 
-    async createPost({title,slug,content,featuredImage,status,userId}){
+    async createPost({title,content,image,status,userID}){
         try {
             return await this.databases.createDocument(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                slug,
+                ID.unique(),
                 {
                     title,
                     content,
-                    featuredImage,
+                    image,
                     status,
-                    userId,
+                    userID,
                 }
             )            
         } catch (error) {
-            console.log('Appwrite service :: createPost :: error',error);            
+            console.log('Appwrite service :: createPost :: error',error); 
+            return false;           
         }
     }
 
-    async updatePost(slug,{title,content,featuredImage,status}){
+    async updatePost(slug,{title,content,image,status}){
         try {
             return await this.databases.updateDocument(
                 config.appwriteDatabaseId,
@@ -42,7 +43,7 @@ export class Service{
                 {
                     title,
                     content,
-                    featuredImage,
+                    image,
                     status
                 }
             )            
@@ -106,7 +107,7 @@ export class Service{
 
     async deleteFile(fileId){
         try {
-            return await this.bucket.createFile(
+            return await this.bucket.deleteFile(
                 config.appwriteBucketId,
                 fileId,
             )   
@@ -118,25 +119,16 @@ export class Service{
 
     }
 
-    async uploadFile(file){
-        try {
-            return await this.bucket.createFile(
+    getFilePreview(fileId){
+        try{
+            return this.bucket.getFilePreview(
                 config.appwriteBucketId,
-                ID.unique(),
-                file,
-            )       
+                fileId,
+            ) 
         } catch (error) {
-            console.log('Appwrite service :: uploadFile :: error',error); 
+            console.log('Appwrite service :: getfilePreview :: error',error); 
             return false         
         }
-
-    }
-
-    getFilePreview(fileId){
-        return this.bucket.getFilePreview(
-            config.appwriteBucketId,
-            fileId,
-        ).href
     }
 
 }
