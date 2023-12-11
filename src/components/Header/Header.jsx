@@ -40,21 +40,21 @@ const Header = () => {
   ]
 
   return (
-    <header className='py-3 shadow bg-gray-500'>
+    <header className='py-3 bg-rgb(253,242,239)'>
       <Container>
         <nav className='flex'>
-          <div className='mr-4'>
+          <div className='flex justify-center items-center'>
             <Link to='/'>
-              <Logo width='70px' />
+              <Logo width='130px' />
             </Link>
           </div>
           <ul className='flex ml-auto'>
             {navItems.map((item) =>
               item.active ?
-                (<li key={item.name}>
+                (<li key={item.name} className='font-semibold text-xl'>
                   <button
                     onClick={() => navigate(item.slug)}
-                    className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'>
+                    className='inline-bock px-6 py-2 duration-200 hover:text-orange-800'>
                     {item.name}
                   </button>
                 </li>)
