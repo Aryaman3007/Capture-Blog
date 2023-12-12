@@ -13,7 +13,7 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData ? post.$id == userData.userId : false;
 
     useEffect(() => {
         if (slug) {
@@ -40,26 +40,27 @@ export default function Post() {
                     <img
                         src={appwriteService.getFilePreview(post.image)}
                         alt={post.title}
-                        className="rounded-xl"
+                        className="rounded-xl w-90"
                     />
 
-                    {isAuthor && (
-                        <div className="absolute right-6 top-6">
-                            <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
-                                    Edit
-                                </Button>
-                            </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
+
+                    <div className="absolute">
+                        <Link to={`/edit-post/${post.$id}`}>
+                            <Button bgColor="bg-green-500" className="mr-3">
+                                Edit
                             </Button>
-                        </div>
-                    )}
+                        </Link>
+                        <Button bgColor="bg-red-500" onClick={deletePost}>
+                            Delete
+                        </Button>
+                    </div>
+
+
                 </div>
                 <div className="w-full mb-6 justify-center items-center flex px-40">
-                    <h1 className="text-3xl font-bold">{post.title}</h1>
+                    <h1 className="text-4xl font-bold">{post.title}</h1>
                 </div>
-                <div className="text-base browser-css justify-center items-center flex px-40">
+                <div className="text-lg font-serif browser-css justify-center items-center flex px-40">
                     {parse(post.content)}
                 </div>
             </Container>

@@ -24,9 +24,9 @@ export default function PostForm({ post }) {
 
     const submit = async (data) => {
         if (post) {
-            const file = data.image[0] ? appwriteService.uploadFile(data.image[0]) : null
+            const file = data.image && data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
             if (file) {
-                appwriteService.deleteFile(post.image)
+                post.image && appwriteService.deleteFile(post.image)
             }
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
@@ -42,7 +42,7 @@ export default function PostForm({ post }) {
                 data.image = fileId
                 const dbPost = await appwriteService.createPost({
                     ...data,
-                    userID: userData.$id,
+                    userID: userData?.$id,
                 })
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`)
@@ -101,7 +101,7 @@ export default function PostForm({ post }) {
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-9"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register("image", { required: !post })}
                 />
@@ -117,10 +117,10 @@ export default function PostForm({ post }) {
                 <Select
                     options={["active", "inactive"]}
                     label="Status"
-                    className="mb-4"
+                    className="mb-14"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full hover:bg-sky-600">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>

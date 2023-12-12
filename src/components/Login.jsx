@@ -71,7 +71,7 @@ function Login() {
                                 required: true,
                             })}
                         />
-                        <Button type="submit" className="w-full">Sign in</Button>
+                        <Button type="submit" className="w-full hover:bg-sky-500">Sign in</Button>
                     </div>
                 </form>
             </div>
