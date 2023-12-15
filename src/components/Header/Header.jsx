@@ -40,12 +40,12 @@ const Header = () => {
   ]
 
   return (
-    <header className='py-3 bg-orange-100 border border-b-gray-400 sticky top-0'>
+    <header className='py-3 bg-slate-900 border-0'>
       <Container>
         <nav className='flex'>
           <div className='flex justify-center items-center'>
             <Link to='/'>
-              <Logo width='130px' />
+              <Logo width='140px' />
             </Link>
           </div>
           <ul className='flex ml-auto'>
@@ -54,7 +54,7 @@ const Header = () => {
                 (<li key={item.name} className='font-semibold text-xl'>
                   <button
                     onClick={() => navigate(item.slug)}
-                    className='inline-bock px-6 py-2 duration-200 hover:text-orange-800'>
+                    className='inline-bock px-6 py-2 duration-200 hover:text-white'>
                     {item.name}
                   </button>
                 </li>)
@@ -67,7 +67,9 @@ const Header = () => {
             )}
           </ul>
         </nav>
+
       </Container>
+
     </header>
   )
 }

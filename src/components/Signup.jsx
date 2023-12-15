@@ -38,8 +38,8 @@ function Signup() {
                         <Logo width="100%" />
                     </span>
                 </div>
-                <h2 className="text-center text-2xl font-bold leading-tight">Sign up to create account</h2>
-                <p className="mt-2 text-center text-base text-black/60">
+                <h2 className="text-center text-2xl font-bold leading-tight text-slate-900">Sign up to create account</h2>
+                <p className="mt-2 text-center text-base font-semibold text-black/60">
                     Already have an account?&nbsp;
                     <Link
                         to="/login"
@@ -50,8 +50,8 @@ function Signup() {
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-                <form onSubmit={handleSubmit(create)}>
-                    <div className='space-y-5'>
+                <form onSubmit={handleSubmit(create)} autoComplete="off">
+                    <div className='space-y-5 text-slate-900'>
                         <Input
                             label="Full Name: "
                             placeholder="Enter your full name"

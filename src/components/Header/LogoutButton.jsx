@@ -14,7 +14,7 @@ const LogoutButton = () => {
     }
 
   return (
-    <button className='rounded-xl font-semibold text-xl inline-block px-6 py-2 duration-200 border border-sky-600 hover:bg-blue-500 hover:text-white' onClick={logoutHandler}>
+    <button className='mr-8 rounded-xl font-semibold text-xl inline-block px-6 py-2 duration-200 border border-sky-600 hover:bg-blue-500 hover:text-white' onClick={logoutHandler}>
       Logout
     </button>
   )

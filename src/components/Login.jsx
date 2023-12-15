@@ -38,8 +38,8 @@ function Login() {
                         <Logo width="100%" />
                     </span>
                 </div>
-                <h2 className="text-center text-2xl font-bold leading-tight">Sign in to your account</h2>
-                <p className="mt-2 text-center text-base text-black/60">
+                <h2 className="text-center text-2xl font-bold leading-tigh text-slate-900">Sign in to your account</h2>
+                <p className="mt-2 text-center text-base font-semibold text-black/60">
                     Don&apos;t have any account?&nbsp;
                     <Link
                         to="/signup"
@@ -50,7 +50,7 @@ function Login() {
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
                 <form onSubmit={handleSubmit(login)} className='mt-8'>
-                    <div className='space-y-5'>
+                    <div className='space-y-5 text-slate-900'>
                         <Input
                             label="Email: "
                             placeholder="Enter your email"

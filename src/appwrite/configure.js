@@ -131,6 +131,16 @@ export class Service{
         }
     }
 
+    async getPostWithUserInfo(postId) {
+        const post = await appwriteService.getPost(postId);
+        const user = await appwriteService.getUser(post.userId);
+        
+        return {
+          post,
+          user,
+        };
+    }
+
 }
 
 const service = new Service()

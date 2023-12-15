@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../images/Logo.png'
+import logo from '../images/Capture-logos_white.png'
 
 
 function Logo({width = '100%'}) {

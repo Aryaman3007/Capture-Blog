@@ -4,16 +4,15 @@ import appwriteService from "../appwrite/configure";
 import Button from "../components/Button";
 import Container from "../components/container/Container";
 import parse from "html-react-parser";
-import { useSelector } from "react-redux";
 
 export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
 
-    const userData = useSelector((state) => state.auth.userData);
+    {/**const userData = useSelector((state) => state.auth.userData);**/}
 
-    const isAuthor = post && userData ? post.$id == userData.userId : false;
+    {/**const isAuthor = post && userData ? post.$id == userData.userId : false;**/}
 
     useEffect(() => {
         if (slug) {
@@ -36,7 +35,7 @@ export default function Post() {
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2 h-80">
+                <div className="w-full flex justify-center mb-4 relative rounded-xl p-2 h-80 border-0">
                     <img
                         src={appwriteService.getFilePreview(post.image)}
                         alt={post.title}
@@ -57,10 +56,10 @@ export default function Post() {
 
 
                 </div>
-                <div className="w-full mb-6 justify-center items-center flex px-40">
+                <div className="w-full mb-6 justify-center items-center flex px-40 text-slate-900">
                     <h1 className="text-4xl font-bold">{post.title}</h1>
                 </div>
-                <div className="text-lg font-serif browser-css justify-center items-center flex px-40">
+                <div className="text-lg font-semibold font-poppins browser-css justify-center items-center flex px-40 text-slate-900">
                     {parse(post.content)}
                 </div>
             </Container>
