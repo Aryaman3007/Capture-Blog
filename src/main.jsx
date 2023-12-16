@@ -8,7 +8,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Login from "./pages/Login.jsx"
 import Protected from './components/AuthLayout.jsx'
-import AddPost from './pages/Addpost.jsx'
+import AddPost from './pages/AddPost.jsx'
 import Signup from './pages/Signup.jsx'
 import EditPost from "./pages/EditPost.jsx";
 import Post from "./pages/Post.jsx";
