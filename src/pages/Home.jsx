@@ -3,7 +3,6 @@ import appwriteService from "../appwrite/configure"
 import Container from '../components/container/Container'
 import PostCard from '../components/PostCard'
 import PacmanLoader from 'react-spinners/PacmanLoader'
-import authService from '../appwrite/auth'
 import { useSelector } from 'react-redux'
 
 function Home() {
