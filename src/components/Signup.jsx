@@ -1,44 +1,48 @@
-import React, { useState } from 'react'
-import authService from '../appwrite/auth'
-import { Link, useNavigate } from 'react-router-dom'
-import { login } from '../store/authSlice'
-import Button from "./Button"
-import Input from './Input'
-import Logo from './Logo'
-import { useDispatch } from 'react-redux'
-import { useForm } from 'react-hook-form'
+import React, { useState } from 'react';
+import authService from '../appwrite/auth';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../store/authSlice';
+import Button from "./Button";
+import Input from './Input';
+import Logo from './Logo';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 function Signup() {
-    const [error, setError] = useState("")
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const { register, handleSubmit } = useForm()
+    const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { register, handleSubmit } = useForm();
 
     const create = async (data) => {
-        setError("")
+        setError("");
+        setSuccessMessage("");
         try {
-            const userData = await authService.createAccount(data)
-            if (userData) {
-                const userData = await authService.getCurrentUser()
-                if (userData) {
-                    dispatch(login(userData))
-                    navigate('/')
+            const account = await authService.createAccount(data);
+            if (account) {
+                const currentUser = await authService.getCurrentUser();
+                if (currentUser) {
+                    dispatch(login(currentUser));
+                    setSuccessMessage("Account created successfully! Please reload the page to continue.");
                 }
             }
         } catch (error) {
-            setError(error.message)
+            setError(error.message);
         }
-    }
+    };
 
     return (
         <div className="flex items-center justify-center">
-            <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
+            <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
                         <Logo width="100%" />
                     </span>
                 </div>
-                <h2 className="text-center text-2xl font-bold leading-tight text-slate-900">Sign up to create account</h2>
+                <h2 className="text-center text-2xl font-bold leading-tight text-slate-900">
+                    Sign up to create account
+                </h2>
                 <p className="mt-2 text-center text-base font-semibold text-black/60">
                     Already have an account?&nbsp;
                     <Link
@@ -49,9 +53,10 @@ function Signup() {
                     </Link>
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+                {successMessage && <p className="text-green-600 mt-8 text-center">{successMessage}</p>}
 
                 <form onSubmit={handleSubmit(create)} autoComplete="off">
-                    <div className='space-y-5 text-slate-900'>
+                    <div className="space-y-5 text-slate-900">
                         <Input
                             label="Full Name: "
                             placeholder="Enter your full name"
@@ -66,7 +71,7 @@ function Signup() {
                             {...register("email", {
                                 required: true,
                                 validate: {
-                                    matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                                    matchPattern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                                         "Email address must be a valid address",
                                 }
                             })}
@@ -86,7 +91,7 @@ function Signup() {
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
-export default Signup
+export default Signup;

@@ -16,8 +16,6 @@ function PostCard({ $id, title, image }) {
             </div>
             <div className="absolute inset-0 h-full w-full rounded-xl bg-black/80 px-12 text-center text-slate-200 [transform:rotateY(180deg)] [backface-visibility:hidden]">
               <div className="flex min-h-full flex-col items-center justify-center">
-                <h1 className="text-3xl font-bold">Author</h1>
-                <p className="text-lg">Author_name</p>
                 <button className="mt-2 rounded-md bg-yellow-800 py-1 px-2 text-sm hover:bg-neutral-900">Read More</button>
               </div>
             </div>

@@ -3,27 +3,24 @@ import appwriteService from "../appwrite/configure"
 import Container from '../components/container/Container'
 import PostCard from '../components/PostCard'
 import PacmanLoader from 'react-spinners/PacmanLoader'
+import authService from '../appwrite/auth'
+import { useSelector } from 'react-redux'
 
 function Home() {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 6000)
-    }, [])
+    const authStatus = useSelector((state) => state.auth.status)
 
     useEffect(() => {
         appwriteService.getPosts().then((posts) => {
             if (posts) {
                 setPosts(posts.documents)
             }
+            setLoading(false);
         })
-    }, [])
-
-    if (posts.length === 0) {
+    }, [posts])
+    
+    if (!authStatus) {
         return (
             <div className='w-full py-8'>
                 <Container>
@@ -32,8 +29,9 @@ function Home() {
                     </div>
                 </Container>
             </div>
-        )
+        );
     }
+    
 
     return (
         !loading ?
