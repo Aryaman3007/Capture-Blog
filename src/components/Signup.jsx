@@ -25,6 +25,7 @@ function Signup() {
                 if (currentUser) {
                     dispatch(login(currentUser));
                     setSuccessMessage("Account created successfully! Please reload the page to continue.");
+                    navigate('/');
                 }
             }
         } catch (error) {

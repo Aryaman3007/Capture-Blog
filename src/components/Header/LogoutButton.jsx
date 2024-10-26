@@ -12,6 +12,7 @@ const LogoutButton = () => {
     authService.logout().then(() => {
       dispatch(logout())
     })
+    !authStatus
   }
 
   return (
